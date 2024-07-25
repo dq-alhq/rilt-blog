@@ -3,6 +3,12 @@ import React from 'react'
 import NavLink from '@/components/nav-link'
 import { Navbar } from '@/components/navbar'
 
+const menuItems = [
+    { id: 1, label: 'Dashboard', url: 'dashboard', icon: 'Gauge' },
+    { id: 2, label: 'Daftar Artikel', url: 'articles.table', icon: 'Book' },
+    { id: 3, label: 'Daftar Project', url: 'project.table', icon: 'Book' }
+]
+
 export default function UserLayout({ children }: { children: React.ReactNode }) {
     return (
         <div className='flex flex-col w-full min-h-screen'>

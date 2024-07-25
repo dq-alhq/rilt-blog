@@ -15,7 +15,7 @@ export default defineConfig({
     resolve: {
         alias: {
             ui: resolve('@/components/ui'),
-            'ziggy-js': resolve('vendor/tightenco/ziggy')
+            'ziggy-js': resolve('@/tightenco/ziggy')
         }
     }
 })

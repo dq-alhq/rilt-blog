@@ -18,7 +18,7 @@
                 "./resources/js/ui"
             ],
             "ziggy-js": [
-                "./vendor/tightenco/ziggy"
+                "./resources/js/tightenco/ziggy"
             ]
         }
     },

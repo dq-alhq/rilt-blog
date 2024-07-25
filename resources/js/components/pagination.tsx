@@ -1,4 +1,4 @@
-import { Pagination as Paginate } from '@/components/ui/pagination'
+import { Pagination as Paginate } from '@/components/ui'
 import { cn } from '@/lib/utils'
 
 export function Pagination({ meta, links, className }: any) {

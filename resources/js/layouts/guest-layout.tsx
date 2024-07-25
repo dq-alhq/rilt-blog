@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { AppLogo } from '@/components/app-logo'
+import { Logo } from '@/components/logo'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { Card, Link } from '@/components/ui'
 import { Head } from '@inertiajs/react'
@@ -21,7 +21,7 @@ export default function GuestLayout({ title, description, children }: Props) {
                 </div>
                 <div>
                     <Link href='/'>
-                        <AppLogo className='w-20 h-20 fill-current' />
+                        <Logo className='w-20 h-20 fill-current' />
                     </Link>
                 </div>
                 <Card className='w-full max-w-lg'>

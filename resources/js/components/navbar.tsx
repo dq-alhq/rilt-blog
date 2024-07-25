@@ -1,22 +1,14 @@
 import React, { useEffect, useState } from 'react'
 
-import { AppLogo } from '@/components/app-logo'
+import { Logo } from '@/components/logo'
 import NavLink from '@/components/nav-link'
 import { SearchCommand } from '@/components/search-command'
 import { ThemeToggle } from '@/components/theme-toggle'
-import {
-    Avatar,
-    Button,
-    buttonVariants,
-    Drawer,
-    Link,
-    ListBox,
-    Menu,
-    Separator
-} from '@/components/ui'
+import { Button, Drawer, Link, ListBox, Separator } from '@/components/ui'
+import UserDropdown from '@/components/user-dropdown'
 import { PageProps } from '@/types'
 import { router, usePage } from '@inertiajs/react'
-import { LogOutIcon, MenuIcon, UserIcon } from 'lucide-react'
+import { MenuIcon } from 'lucide-react'
 
 const links = [
     {
@@ -24,8 +16,12 @@ const links = [
         name: 'Home'
     },
     {
-        href: 'dashboard',
-        name: 'Dashboard'
+        href: 'articles.index',
+        name: 'Artikel'
+    },
+    {
+        href: 'projects.index',
+        name: 'Project'
     }
 ]
 
@@ -52,7 +48,7 @@ export function Navbar() {
                 <div className='container flex items-center justify-between h-16 gap-2'>
                     <div className='hidden mr-4 md:flex'>
                         <Link className='mr-6' href='/'>
-                            <AppLogo className='w-8 h-8 fill-danger' />
+                            <Logo className='w-8 h-8 fill-danger' />
                         </Link>
                         <nav className='flex items-center gap-2 text-sm'>
                             {links.map((link) => (
@@ -114,39 +110,7 @@ export function Navbar() {
                         </Button>
                         <ThemeToggle />
                         <Separator orientation='vertical' className='h-8 mx-2' />
-                        {user ? (
-                            <Menu>
-                                <Menu.Trigger>
-                                    <Avatar
-                                        src={user?.avatar}
-                                        alt={user?.name}
-                                        initials='DQ'
-                                    />
-                                </Menu.Trigger>
-                                <Menu.Content placement='bottom right'>
-                                    <Menu.Item href={route('profile.edit')}>
-                                        <UserIcon />
-                                        Profile
-                                    </Menu.Item>
-                                    <Menu.Item
-                                        isDanger
-                                        onAction={() => router.post(route('logout'))}
-                                    >
-                                        <LogOutIcon />
-                                        Log Out
-                                    </Menu.Item>
-                                </Menu.Content>
-                            </Menu>
-                        ) : (
-                            <Link
-                                className={buttonVariants({
-                                    variant: 'primary'
-                                })}
-                                href={route('login')}
-                            >
-                                Login
-                            </Link>
-                        )}
+                        <UserDropdown user={user} />
                     </div>
                 </div>
             </header>

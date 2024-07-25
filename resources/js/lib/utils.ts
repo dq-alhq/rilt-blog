@@ -23,6 +23,15 @@ export function useMediaQuery(query: string) {
     return value
 }
 
+export function slugify(string: string) {
+    return string
+        .normalize('NFKD')
+        .replace(/[^a-z0-9 ]/gi, '')
+        .trim()
+        .replace(/\s+/g, '-')
+        .toLowerCase()
+}
+
 export function formatDate(input: string | number): string {
     const date = new Date(input)
     return date.toLocaleDateString('en-US', {

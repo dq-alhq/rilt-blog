@@ -5,16 +5,17 @@
         "api/index.php": { "runtime": "vercel-php@0.6.0" }
     },
     "routes": [
-        {
-            "src": "/(.*)",
-            "dest": "/api/index.php"
-        }
+        { "src": "/build/(.*)", "dest": "/public/build/" },
+        { "src": "/(.*)", "dest": "/api/index.php" }
     ],
+    "public": true,
+    "buildCommand": "vite build",
+    "outputDirectory": "public",
     "env": {
         "APP_ENV": "production",
-        "APP_DEBUG": "true",
-        "APP_URL": "https://cleon-laravel.com",
-        "APP_KEY": "base64:wuOfR9U3dCnJdORiJOSW3G09T0ci4WfDcPjFP7cWwKI=",
+        "APP_DEBUG": "false",
+        "APP_URL": "https://cleon-laravel.vercel.app",
+        "APP_KEY": "base64:VHa/qjJFZ5s+Hgze0BlROQArWOPM92LkcKQzbjSFSHU=",
         "APP_CONFIG_CACHE": "/tmp/config.php",
         "APP_EVENTS_CACHE": "/tmp/events.php",
         "APP_PACKAGES_CACHE": "/tmp/packages.php",
@@ -23,6 +24,12 @@
         "VIEW_COMPILED_PATH": "/tmp",
         "CACHE_DRIVER": "array",
         "LOG_CHANNEL": "stderr",
-        "SESSION_DRIVER": "cookie"
+        "SESSION_DRIVER": "cookie",
+        "DB_CONNECTION": "pgsql",
+        "DB_HOST": "aws-0-ap-southeast-1.pooler.supabase.com",
+        "DB_PORT": "5432",
+        "DB_DATABASE": "postgres",
+        "DB_USERNAME": "postgres.spuzwbqxrezoglxywncg",
+        "DB_PASSWORD": "Dzb8z7ZiAy2qELcS"
     }
 }

@@ -1,27 +1,30 @@
-import React, { FormEventHandler, useState } from 'react'
+import React, { FormEventHandler } from 'react'
 
 import {
     Button,
+    buttonVariants,
     Card,
     Form,
+    Link,
     MultiSelect,
-    Switch,
     Textarea,
     TextField
 } from '@/components/ui'
-import { cn } from '@/lib/utils'
-import { Project, Tag } from '@/types'
-import { useForm } from '@inertiajs/react'
+import UserLayout from '@/layouts/user-layout'
+import { FormSetting, Project, Tag } from '@/types'
+import { router, useForm } from '@inertiajs/react'
 
-export default function ArticleForm({
+export default function ProjectForm({
     project,
-    tags
+    tags,
+    form_setting
 }: {
-    project?: Project
+    project: Project
     tags: Tag[]
+    form_setting: FormSetting
 }) {
-    const [isPreview, setIsPreview] = useState(false)
-    const { data, setData, errors, post, processing, reset } = useForm({
+    const { method, action, title } = form_setting
+    const { data, setData, errors, setError, processing } = useForm({
         title: project?.title || '',
         description: project?.description || '',
         tags:
@@ -33,61 +36,67 @@ export default function ArticleForm({
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault()
-
-        post(route('project.store'), {
-            method: 'post',
-            onSuccess: () => reset()
-        })
+        router.post(
+            action,
+            {
+                _method: method,
+                ...data,
+                tags: data.tags.map((tag) => tag.value)
+            },
+            { onError: (errors: any) => setError(errors) }
+        )
     }
 
-    const isPreviewClassname: any = isPreview ? 'hidden' : ''
-
     return (
-        <Card className='p-1 md:p-0 border-0 shadow-none'>
-            <Form onSubmit={submit} className='space-y-4'>
-                <TextField
-                    className={cn(isPreviewClassname)}
-                    label='Title'
-                    value={data.title}
-                    onChange={(e) => setData('title', e)}
-                    isRequired
-                    validationBehavior='aria'
-                    errorMessage={errors.title}
-                />
-                <Textarea
-                    className={cn(isPreviewClassname)}
-                    label='Description'
-                    textareaClassName='min-h-[90px]'
-                    value={data.description}
-                    onChange={(e) => setData('description', e)}
-                    isRequired
-                    validationBehavior='aria'
-                    errorMessage={errors.description}
-                />
-                <MultiSelect
-                    label='Tags'
-                    max={4}
-                    className={cn(isPreviewClassname)}
-                    items={tags.map((tag) => ({
-                        value: tag.id.toString(),
-                        label: tag.name
-                    }))}
-                    value={data.tags}
-                    onChange={(e) => setData('tags', e)}
-                    errorMessage={errors.tags}
-                />
-                <div className='flex justify-between'>
-                    <Switch
-                        isSelected={isPreview}
-                        onChange={() => setIsPreview(!isPreview)}
-                    >
-                        Preview
-                    </Switch>
+        <Card>
+            <Card.Header className='flex flex-row items-center justify-between'>
+                <Card.Title>{title}</Card.Title>
+                <Link
+                    href={route('projects.table')}
+                    className={buttonVariants({ variant: 'outline' })}
+                >
+                    Kembali
+                </Link>
+            </Card.Header>
+            <Form onSubmit={submit} validationErrors={errors} validationBehavior='aria'>
+                <Card.Content className='space-y-4'>
+                    <TextField
+                        label='Title'
+                        name='title'
+                        id='title'
+                        value={data.title}
+                        onChange={(e) => setData('title', e)}
+                        isRequired
+                        errorMessage={errors.title}
+                    />
+                    <Textarea
+                        label='Description'
+                        textareaClassName='min-h-[90px]'
+                        value={data.description}
+                        onChange={(e) => setData('description', e)}
+                        isRequired
+                        errorMessage={errors.description}
+                    />
+                    <MultiSelect
+                        label='Tags'
+                        max={4}
+                        items={tags.map((tag: Tag) => ({
+                            value: String(tag.id),
+                            label: String(tag.name)
+                        }))}
+                        value={data?.tags}
+                        onChange={(items) => setData('tags', items)}
+                        errorMessage={errors.tags}
+                    />
+                </Card.Content>
+                <Card.Footer className='justify-end'>
                     <Button isDisabled={processing} type='submit'>
-                        {project ? 'Update' : 'Create'}
+                        Simpan
                     </Button>
-                </div>
+                </Card.Footer>
             </Form>
         </Card>
     )
 }
+
+ProjectForm.layout = (page: any) => <UserLayout children={page} />

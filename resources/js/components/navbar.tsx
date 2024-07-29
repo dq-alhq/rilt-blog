@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react'
 import { Logo } from '@/components/logo'
 import NavLink from '@/components/nav-link'
 import { SearchCommand } from '@/components/search-command'
-import { ThemeToggle } from '@/components/theme-toggle'
 import { Button, Drawer, Link, ListBox, Separator } from '@/components/ui'
 import UserDropdown from '@/components/user-dropdown'
 import { PageProps } from '@/types'
@@ -11,18 +10,9 @@ import { router, usePage } from '@inertiajs/react'
 import { MenuIcon } from 'lucide-react'
 
 const links = [
-    {
-        href: 'home',
-        name: 'Home'
-    },
-    {
-        href: 'articles.index',
-        name: 'Artikel'
-    },
-    {
-        href: 'projects.index',
-        name: 'Project'
-    }
+    { name: 'Home', href: 'home' },
+    { name: 'Articles', href: 'articles.index' },
+    { name: 'Projects', href: 'projects.index' }
 ]
 
 export function Navbar() {
@@ -51,15 +41,24 @@ export function Navbar() {
                             <Logo className='w-8 h-8 fill-danger' />
                         </Link>
                         <nav className='flex items-center gap-2 text-sm'>
-                            {links.map((link) => (
-                                <NavLink
-                                    key={link.href}
-                                    href={route(link.href)}
-                                    active={route().current(link.href)}
-                                >
-                                    {link.name}
-                                </NavLink>
-                            ))}
+                            <NavLink
+                                href={route('home')}
+                                active={route().current('home')}
+                            >
+                                Home
+                            </NavLink>
+                            <NavLink
+                                href={route('articles.index')}
+                                active={route().current('articles.*')}
+                            >
+                                Artikel
+                            </NavLink>
+                            <NavLink
+                                href={route('projects.index')}
+                                active={route().current('projects.*')}
+                            >
+                                Project
+                            </NavLink>
                         </nav>
                     </div>
                     <Button
@@ -108,7 +107,6 @@ export function Navbar() {
                                 ⌘K
                             </span>
                         </Button>
-                        <ThemeToggle />
                         <Separator orientation='vertical' className='h-8 mx-2' />
                         <UserDropdown user={user} />
                     </div>

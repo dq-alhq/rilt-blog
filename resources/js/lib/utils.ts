@@ -44,3 +44,13 @@ export function formatDate(input: string | number): string {
 export function wait(number: number = 1000) {
     return new Promise((resolve) => setTimeout(resolve, number))
 }
+
+export const getInitials = (str: string) => {
+    const allNames = str.trim().split(' ')
+    return allNames.reduce((acc, curr, index) => {
+        if (index === 0 || index === allNames.length - 1) {
+            acc = `${acc}${curr.charAt(0).toUpperCase()}`
+        }
+        return acc
+    }, '')
+}

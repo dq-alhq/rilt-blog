@@ -3,20 +3,21 @@ import UserLayout from '@/layouts/user-layout'
 import { Head } from '@inertiajs/react'
 import { BookCopyIcon, BookIcon } from 'lucide-react'
 
-export default function DashboardPage() {
+export default function DashboardPage(props: any) {
+    const { article_count, project_count, latest_article, latest_project } = props
     return (
         <>
             <Head title='Dashboard' />
-            <div className='grid md:grid-cols-2 gap-6'>
+            <main className='grid md:grid-cols-2 gap-6'>
                 <Card>
                     <Card.Header className='flex flex-row items-center justify-between space-y-0 pb-2'>
                         <Card.Title className='font-medium'>Artikel Dibuat</Card.Title>
                         <BookIcon className='size-6 text-muted-foreground' />
                     </Card.Header>
                     <Card.Content>
-                        <div className='text-2xl font-bold'>92 Artikel</div>
+                        <div className='text-2xl font-bold'>{article_count} Artikel</div>
                         <p className='text-xs text-muted-foreground'>
-                            Update terakhir Juli 22, 2024
+                            Update terakhir {latest_article}
                         </p>
                     </Card.Content>
                     <Card.Footer>
@@ -34,9 +35,9 @@ export default function DashboardPage() {
                         <BookCopyIcon className='size-6 text-muted-foreground' />
                     </Card.Header>
                     <Card.Content>
-                        <div className='text-2xl font-bold'>92 Project</div>
+                        <div className='text-2xl font-bold'>{project_count} Project</div>
                         <p className='text-xs text-muted-foreground'>
-                            Update terakhir Juli 22, 2024
+                            Update terakhir {latest_project}
                         </p>
                     </Card.Content>
                     <Card.Footer>
@@ -48,7 +49,7 @@ export default function DashboardPage() {
                         </Link>
                     </Card.Footer>
                 </Card>
-            </div>
+            </main>
         </>
     )
 }

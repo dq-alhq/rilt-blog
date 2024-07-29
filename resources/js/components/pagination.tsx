@@ -5,7 +5,7 @@ export function Pagination({ meta, links, className }: any) {
     return (
         <div
             className={cn(
-                'flex flex-col-reverse p-6 pt-3 items-center justify-center gap-3 lg:justify-between lg:flex-row',
+                'flex flex-col-reverse w-full p-6 pt-3 items-center justify-center gap-3 lg:justify-between lg:flex-row',
                 className
             )}
         >

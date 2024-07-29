@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Accordion, Link } from '@/components/ui'
+import { Accordion } from '@/components/ui'
 import { cn, slugify } from '@/lib/utils'
 import { ListCollapseIcon } from 'lucide-react'
 
@@ -10,26 +10,26 @@ export default function TableOfContents({ text }: { text: string }) {
         (line) => line.includes('##') || line.includes('###')
     )
 
+    const [open, setOpen] = React.useState(true)
+
     const activeId = useActiveItem(filteredLines)
     return (
-        <Accordion>
-            <Accordion.Item className='border-none'>
-                <Accordion.Trigger className='w-full border rounded-lg px-3 mb-2 py-2 font-semibold text-base'>
-                    <ListCollapseIcon className='size-4' /> Daftar Isi
-                </Accordion.Trigger>
-                <Accordion.Content className='rounded-lg border p-3'>
-                    {filteredLines.length > 0 && (
+        filteredLines.length > 0 && (
+            <Accordion>
+                <Accordion.Item className='border-0'>
+                    <Accordion.Trigger className='w-full rounded-lg border px-4 py-2 mb-2'>
+                        <ListCollapseIcon className='size-4' /> Daftar Isi
+                    </Accordion.Trigger>
+                    <Accordion.Content className='w-full rounded-lg border p-4'>
                         <ul>
                             {filteredLines.map((line, index) => (
-                                <React.Fragment key={index}>
-                                    <TocLink line={line} activeId={activeId} />
-                                </React.Fragment>
+                                <TocLink key={index} line={line} activeId={activeId} />
                             ))}
                         </ul>
-                    )}
-                </Accordion.Content>
-            </Accordion.Item>
-        </Accordion>
+                    </Accordion.Content>
+                </Accordion.Item>
+            </Accordion>
+        )
     )
 }
 
@@ -42,7 +42,7 @@ function TocLink({ line, activeId }: { line: any; activeId: string | null }) {
     const indentClass = isH2 ? 'pl-0' : isH3 ? 'pl-4' : ''
     return (
         <li className={cn(indentClass)}>
-            <Link
+            <a
                 className={cn(
                     'transition-colors text-sm duration-300',
                     slug === activeId ? 'text-primary' : 'text-foreground'
@@ -50,7 +50,7 @@ function TocLink({ line, activeId }: { line: any; activeId: string | null }) {
                 href={`#${slug}`}
             >
                 {trimmedLine}
-            </Link>
+            </a>
         </li>
     )
 }

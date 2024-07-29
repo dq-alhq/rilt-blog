@@ -24,7 +24,7 @@ export const SearchCommand = ({ open, setOpen }: Props) => {
 
     return (
         <Command.Modal isOpen={open} onOpenChange={setOpen}>
-            <Command.Input placeholder='Type a command or search...' />
+            <Command.Input autoFocus placeholder='Type a command or search...' />
             <Command.List>
                 <Command.Empty>No results found.</Command.Empty>
                 <Command.Group heading='Suggestions'>
@@ -32,25 +32,56 @@ export const SearchCommand = ({ open, setOpen }: Props) => {
                         <Icon icon='Home' className='w-4 h-4 mr-2' />
                         <span>Home</span>
                     </Command.Item>
+                    <Command.Item
+                        value='articles'
+                        onSelect={() => goto(route('articles.index'))}
+                    >
+                        <Icon icon='Book' className='w-4 h-4 mr-2' />
+                        <span>Artikel</span>
+                    </Command.Item>
+                    <Command.Item
+                        value='projects'
+                        onSelect={() => goto(route('projects.index'))}
+                    >
+                        <Icon icon='BookCopy' className='w-4 h-4 mr-2' />
+                        <span>Project</span>
+                    </Command.Item>
                 </Command.Group>
-                <Command.Separator />
                 {user ? (
-                    <Command.Group heading='Settings'>
-                        <Command.Item
-                            value='profile'
-                            onSelect={() => goto(route('profile.edit'))}
-                        >
-                            <Icon icon='CircleUserRound' className='mr-2 size-4' />
-                            <span>Profile</span>
-                        </Command.Item>
-                        <Command.Item
-                            value='logout'
-                            onSelect={() => router.post(route('logout'))}
-                        >
-                            <Icon icon='LogOut' className='mr-2 size-4' />
-                            <span>Logout</span>
-                        </Command.Item>
-                    </Command.Group>
+                    <>
+                        <Command.Group heading='Settings'>
+                            <Command.Item
+                                value='profile'
+                                onSelect={() => goto(route('profile.edit'))}
+                            >
+                                <Icon icon='CircleUserRound' className='mr-2 size-4' />
+                                <span>Profile</span>
+                            </Command.Item>
+                            <Command.Item
+                                value='logout'
+                                onSelect={() => router.post(route('logout'))}
+                            >
+                                <Icon icon='LogOut' className='mr-2 size-4' />
+                                <span>Logout</span>
+                            </Command.Item>
+                        </Command.Group>
+                        <Command.Group heading='Creations'>
+                            <Command.Item
+                                value='articles_create'
+                                onSelect={() => goto(route('articles.create'))}
+                            >
+                                <Icon icon='BookPlus' className='mr-2 size-4' />
+                                <span>Daftar Artikel Saya</span>
+                            </Command.Item>
+                            <Command.Item
+                                value='projects_create'
+                                onSelect={() => goto(route('projects.create'))}
+                            >
+                                <Icon icon='BookmarkPlus' className='mr-2 size-4' />
+                                <span>Daftar Project Saya</span>
+                            </Command.Item>
+                        </Command.Group>
+                    </>
                 ) : (
                     <Command.Group heading='Auth'>
                         <Command.Item value='login' onSelect={() => goto(route('login'))}>

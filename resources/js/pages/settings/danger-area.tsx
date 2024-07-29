@@ -29,7 +29,7 @@ export default function DangerArea() {
     }
 
     return (
-        <div className='container'>
+        <>
             <Head title='Danger Area' />
             <Card>
                 <Card.Header>
@@ -91,7 +91,7 @@ export default function DangerArea() {
                     </Modal>
                 </Card.Content>
             </Card>
-        </div>
+        </>
     )
 }
 

@@ -31,11 +31,7 @@ export function FileIcon({ filetype }: { filetype: string }) {
     const fileIcon = GetIcon({ filetype: filetype })
     return (
         <div className='size-5 flex items-center'>
-            <img
-                // src={`/svgs/${fileIcon}.svg`}
-                alt={fileIcon}
-                className='size-5 invert'
-            />
+            <img src={`/svgs/${fileIcon}.svg`} alt={fileIcon} className='size-5 invert' />
         </div>
     )
 }

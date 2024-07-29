@@ -98,7 +98,11 @@ function removePickedOption(groupOption: GroupOption, picked: MultiSelectItem[])
 
 function isOptionsExist(groupOption: GroupOption, targetOption: MultiSelectItem[]) {
     for (const [key, value] of Object.entries(groupOption)) {
-        if (value.some((item) => targetOption.find((p) => p.value === item.value))) {
+        if (
+            value.some((item) =>
+                targetOption.find((p) => p.value === item.value && p.label === item.label)
+            )
+        ) {
             return true
         }
     }
@@ -164,7 +168,6 @@ const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
         const inputRef = React.useRef<HTMLInputElement>(null)
         const [open, setOpen] = React.useState(false)
         const [isLoading, setIsLoading] = React.useState(false)
-
         const [selected, setSelected] = React.useState<MultiSelectItem[]>(value || [])
         const [items, setOptions] = React.useState<GroupOption>(
             transToGroupOption(arrayDefaultItems, groupBy)
@@ -444,7 +447,7 @@ const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
                                                             return (
                                                                 <CommandPrimitive.Item
                                                                     key={item.value}
-                                                                    value={item.value}
+                                                                    value={item.label}
                                                                     disabled={
                                                                         item.disable
                                                                     }

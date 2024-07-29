@@ -32,7 +32,7 @@ export default function Password() {
     }
 
     return (
-        <div className='container'>
+        <>
             <Head title='Password' />
             <Card>
                 <Card.Header>
@@ -91,7 +91,7 @@ export default function Password() {
                     </Form>
                 </Card.Content>
             </Card>
-        </div>
+        </>
     )
 }
 Password.layout = (page: any) => <UserLayout children={page} />

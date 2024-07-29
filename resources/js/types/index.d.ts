@@ -5,10 +5,14 @@ export interface User {
     name: string
     username: string
     email: string
-    email_verified_at: string
+    admin: boolean
+    verified: boolean
     avatar: string
+    joined: string
     articles: Article[]
     projects: Project[]
+    articles_created: number
+    projects_created: number
 }
 
 export interface Article {
@@ -16,11 +20,11 @@ export interface Article {
     slug: string
     title: string
     description: string
-    content: string
+    body: string
     created_at: string
-    published: boolean
+    status: 0 | 1 | 2
     user_id: number
-    user: User
+    author: User
     tags: Tag[]
     project: Project
     chapter: number
@@ -34,11 +38,12 @@ export interface Project {
     description: string
     image: string
     created_at: string
-    published: boolean
+    status: 0 | 1 | 2
     user_id: number
-    user: User
+    author: User
     articles: Article[]
     tags: Tag[]
+    article_count: number
 }
 
 export interface Tag {
@@ -46,6 +51,8 @@ export interface Tag {
     name: string
     slug: string
     articles: Article[]
+    articles_count: number
+    projects_count: number
     projects: Project[]
 }
 
@@ -58,9 +65,16 @@ export interface Bookmark {
     user: User
 }
 
+export interface FormSetting {
+    method: 'POST' | 'PUT'
+    action: string
+    title: string
+}
+
 export type PageProps<T extends Record<string, unknown> = Record<string, unknown>> = T & {
     auth: {
         user: User
     }
     ziggy: Config & { location: string }
+    message: string
 }

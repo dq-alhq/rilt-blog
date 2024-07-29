@@ -12,7 +12,7 @@ import {
 } from '@/components/ui'
 import UserLayout from '@/layouts/user-layout'
 import { FormSetting, Project, Tag } from '@/types'
-import { router, useForm } from '@inertiajs/react'
+import { Head, router, useForm } from '@inertiajs/react'
 
 export default function ProjectForm({
     project,
@@ -49,6 +49,7 @@ export default function ProjectForm({
 
     return (
         <Card>
+            <Head title={title} />
             <Card.Header className='flex flex-row items-center justify-between'>
                 <Card.Title>{title}</Card.Title>
                 <Link

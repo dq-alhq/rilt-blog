@@ -4,11 +4,13 @@ import { Search } from '@/components/search'
 import { TagLinks } from '@/components/tag-links'
 import AppLayout from '@/layouts/app-layout'
 import { Article } from '@/types'
+import { Head } from '@inertiajs/react'
 
 export default function ArticleIndex(props: any) {
     const { data: articles, meta, links } = props.articles
     return (
         <main>
+            <Head title='Artikel' />
             <div className='container mt-12'>
                 <h1 className='text-2xl font-bold text-foreground sm:text-3xl lg:text-5xl'>
                     Artikel

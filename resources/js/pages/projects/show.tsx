@@ -2,11 +2,12 @@ import { TagBadge } from '@/components/tag-links'
 import { buttonVariants, Card } from '@/components/ui'
 import { formatDate } from '@/lib/utils'
 import { Project, Tag } from '@/types'
-import { Link } from '@inertiajs/react'
+import { Head, Link } from '@inertiajs/react'
 
 export default function ProjectShow({ project }: { project: Project }) {
     return (
         <main className='container grid my-8 md:my-14'>
+            <Head title={project.title} />
             <div className='w-full'>
                 <div className='text-2xl md:text-4xl font-bold'>{project.title}</div>
                 <div className='md:my-4 text-sm md:text-base'>{project.description}</div>

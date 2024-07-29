@@ -5,11 +5,13 @@ import { Badge, Card, Table } from '@/components/ui'
 import UserLayout from '@/layouts/user-layout'
 import { PublishOption } from '@/pages/admin/articles'
 import { Project, Tag } from '@/types'
+import { Head } from '@inertiajs/react'
 
 export default function Projects(props: any) {
     const { data: projects, meta, links } = props.projects
     return (
         <Card>
+            <Head title='Projects' />
             <Card.Header>
                 <Card.Title>Project</Card.Title>
             </Card.Header>

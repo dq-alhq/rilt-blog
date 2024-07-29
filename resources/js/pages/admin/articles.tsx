@@ -5,12 +5,13 @@ import { Badge, badgeVariants, Card, Menu, Table } from '@/components/ui'
 import UserLayout from '@/layouts/user-layout'
 import { cn } from '@/lib/utils'
 import { Article, Tag } from '@/types'
-import { router } from '@inertiajs/react'
+import { Head, router } from '@inertiajs/react'
 
 export default function Articles(props: any) {
     const { data: articles, meta, links } = props.articles
     return (
         <Card>
+            <Head title='Artikel' />
             <Card.Header>
                 <Card.Title>Artikel</Card.Title>
             </Card.Header>

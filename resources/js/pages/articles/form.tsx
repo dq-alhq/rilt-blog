@@ -18,7 +18,7 @@ import {
 import UserLayout from '@/layouts/user-layout'
 import { cn, formatDate } from '@/lib/utils'
 import { Article, FormSetting, Tag } from '@/types'
-import { router, useForm } from '@inertiajs/react'
+import { Head, router, useForm } from '@inertiajs/react'
 
 export default function ArticleForm({
     article,
@@ -74,6 +74,7 @@ export default function ArticleForm({
 
     return (
         <Card>
+            <Head title={title} />
             <Card.Header className='flex flex-row items-center justify-between'>
                 <Card.Title>{title}</Card.Title>
                 <Link

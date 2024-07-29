@@ -5,7 +5,7 @@ import { Avatar, Button, buttonVariants, Card } from '@/components/ui'
 import AppLayout from '@/layouts/app-layout'
 import { formatDate, getInitials } from '@/lib/utils'
 import { Tag } from '@/types'
-import { Link } from '@inertiajs/react'
+import { Head, Link } from '@inertiajs/react'
 import { ChevronsLeft, ChevronsRight } from 'lucide-react'
 
 export default function ArticleShow(props: any) {
@@ -13,6 +13,7 @@ export default function ArticleShow(props: any) {
     console.log(article)
     return (
         <>
+            <Head title={article.title} />
             <main className='container flex flex-col-reverse lg:flex-row my-8 md:my-16 gap-16'>
                 <div className='lg:w-2/3 w-full'>
                     {article.project && (

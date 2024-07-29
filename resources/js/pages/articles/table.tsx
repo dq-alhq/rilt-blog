@@ -2,12 +2,14 @@ import { List } from '@/components/item-list'
 import { Search } from '@/components/search'
 import { buttonVariants, Card, Link } from '@/components/ui'
 import UserLayout from '@/layouts/user-layout'
+import { Head } from '@inertiajs/react'
 import { BookPlusIcon } from 'lucide-react'
 
 export default function ArticlesTable(props: any) {
     const { data: articles, meta, links } = props.articles
     return (
         <Card>
+            <Head title={props.project ? "My Project's Chapters" : 'My Articles'} />
             <Card.Header className='flex flex-col lg:flex-row w-full flex-wrap items-center justify-between gap-4'>
                 <Card.Title className='text-2xl font-semibold'>Artikel</Card.Title>
                 <div className='flex items-center gap-2'>

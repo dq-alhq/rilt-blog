@@ -21,6 +21,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         JsonResource::withoutWrapping();
-//        \URL::forceScheme('https');
+        \URL::forceScheme('https');
     }
 }

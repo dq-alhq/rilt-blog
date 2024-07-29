@@ -1,8 +1,8 @@
 import { TagBadge } from '@/components/tag-links'
-import { Link } from '@/components/ui'
+import { buttonVariants, Card } from '@/components/ui'
 import { formatDate } from '@/lib/utils'
 import { Project, Tag } from '@/types'
-import { Collection } from 'react-aria-components'
+import { Link } from '@inertiajs/react'
 
 export default function ProjectShow({ project }: { project: Project }) {
     return (
@@ -24,32 +24,31 @@ export default function ProjectShow({ project }: { project: Project }) {
                 </div>
                 <div className='my-8'>
                     <h1 className='text-xl font-semibold mb-4'>Daftar Chapter</h1>
-                    <Collection items={project?.articles} aria-label='Article List'>
-                        {(item) => (
-                            <div className='flex gap-2 max-w-2xl'>
+                    <div className='max-w-2xl grid gap-2'>
+                        {project.articles.map((item) => (
+                            <div key={item.id} className='w-full flex gap-2'>
                                 <Link
-                                    href={`/articles/${item.slug}`}
-                                    className='p-4 shadow-sm rounded-lg hover:bg-primary/70 hover:text-primary-foreground pressed:bg-primary transition-colors pressed:text-primary-foreground text-xl flex justify-center items-center w-12 border h-full'
+                                    href={route('articles.show', item.slug)}
+                                    className={buttonVariants({ variant: 'outline' })}
                                 >
                                     {item.chapter}
                                 </Link>
-                                <div
-                                    key={item.id}
-                                    className='p-4 rounded-lg border shadow-sm'
+                                <Link
+                                    href={route('articles.show', item.slug)}
+                                    className='w-full'
                                 >
-                                    <Link
-                                        href={`/articles/${item.slug}`}
-                                        className='text-xl mb-1 font-semibold leading-none tracking-tight line-clamp-1'
-                                    >
-                                        {item.title}
-                                    </Link>
-                                    <p className='line-clamp-1 text-muted-foreground text-sm'>
-                                        {item.description}
-                                    </p>
-                                </div>
+                                    <Card>
+                                        <Card.Header className='p-3'>
+                                            <Card.Title>{item.title}</Card.Title>
+                                            <Card.Description>
+                                                {item.description}
+                                            </Card.Description>
+                                        </Card.Header>
+                                    </Card>
+                                </Link>
                             </div>
-                        )}
-                    </Collection>
+                        ))}
+                    </div>
                 </div>
             </div>
         </main>

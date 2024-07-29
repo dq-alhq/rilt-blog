@@ -27,7 +27,7 @@ export default function Profile({ mustVerifyEmail, status }: Props) {
     }
 
     return (
-        <div className='container'>
+        <>
             <Head title='Profile' />
             <Card>
                 <Card.Header>
@@ -72,13 +72,13 @@ export default function Profile({ mustVerifyEmail, status }: Props) {
 
                         {mustVerifyEmail && user.email_verified_at === null && (
                             <div>
-                                <p className='text-sm mt-2'>
+                                <p className='text-sm mt-2 text-danger'>
                                     Your email address is unverified.
                                     <Link
                                         onPress={() =>
                                             router.post(route('verification.send'))
                                         }
-                                        className='text-sm text-muted hover:text-foreground'
+                                        className='text-sm text-foreground hover:text-primary ml-2 cursor-pointer'
                                     >
                                         Click here to re-send the verification email.
                                     </Link>
@@ -101,7 +101,7 @@ export default function Profile({ mustVerifyEmail, status }: Props) {
                     </Form>
                 </Card.Content>
             </Card>
-        </div>
+        </>
     )
 }
 

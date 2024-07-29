@@ -1,15 +1,12 @@
 import { ItemCard } from '@/components/item-card'
 import { Pagination } from '@/components/pagination'
+import { Search } from '@/components/search'
 import { TagLinks } from '@/components/tag-links'
+import AppLayout from '@/layouts/app-layout'
 import { Article } from '@/types'
 
-interface Props {
-    articles: Article[]
-    page: number
-    total: number
-}
-
-export default function ArticleIndex({ articles, page, total }: Props) {
+export default function ArticleIndex(props: any) {
+    const { data: articles, meta, links } = props.articles
     return (
         <main>
             <div className='container mt-12'>
@@ -20,20 +17,19 @@ export default function ArticleIndex({ articles, page, total }: Props) {
                     Selamat datang di halaman artikel kami! Dari pemula hingga pengembang
                     yang berpengalaman, kumpulan artikel kami siap membantu.
                 </p>
-                <TagLinks />
+                <div className='flex flex-col lg:flex-row gap-8 justify-between mt-10'>
+                    <TagLinks />
+                    <Search />
+                </div>
                 <div className='py-8 sm:py-16'>
                     <div className='grid gap-6 sm:grid-cols-2 sm:gap-10 lg:grid-cols-3 lg:gap-x-12 lg:gap-y-12'>
-                        {articles.map((article: Article) => (
-                            <ItemCard key={article.id} item={article} type='article' />
+                        {articles?.map((article: Article, index: number) => (
+                            <ItemCard key={index} item={article} type='article' />
                         ))}
                     </div>
-                    {articles.length > 9 && (
+                    {articles.length >= 1 && (
                         <div className='py-3'>
-                            <Pagination
-                                current={Number(page)}
-                                per_page={9}
-                                total={total}
-                            />
+                            <Pagination meta={meta} links={links} />
                         </div>
                     )}
                 </div>
@@ -41,3 +37,5 @@ export default function ArticleIndex({ articles, page, total }: Props) {
         </main>
     )
 }
+
+ArticleIndex.layout = (page: any) => <AppLayout children={page} />

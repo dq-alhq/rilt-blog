@@ -1,5 +1,6 @@
-import { createContext, useContext, useEffect, useState, type ReactNode } from 'react'
+import { createContext, type ReactNode, useContext, useEffect, useState } from 'react'
 
+import { Toaster } from '@/components/ui'
 import { router } from '@inertiajs/react'
 import { RouterProvider } from 'react-aria-components'
 
@@ -88,6 +89,7 @@ function ThemeProvider({
 const Provider = ({ children }: { children: ReactNode }) => (
     <RouterProvider navigate={(to, options) => router.visit(to, options as any)}>
         <ThemeProvider defaultTheme='system' storageKey='vite-theme'>
+            <Toaster />
             {children}
         </ThemeProvider>
     </RouterProvider>

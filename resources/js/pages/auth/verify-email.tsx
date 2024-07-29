@@ -1,8 +1,9 @@
 import { FormEventHandler } from 'react'
 
-import { Button, Form, Link } from '@/components/ui'
+import { Button, Form } from '@/components/ui'
 import GuestLayout from '@/layouts/guest-layout'
 import { router, useForm } from '@inertiajs/react'
+import { LogOutIcon } from 'lucide-react'
 
 export default function VerifyEmail({ status }: { status?: string }) {
     const { post, processing } = useForm({})
@@ -28,20 +29,17 @@ export default function VerifyEmail({ status }: { status?: string }) {
                 </div>
             )}
 
-            <Form onSubmit={submit}>
-                <div className='mt-4 flex items-center justify-between'>
+            <div className='mt-4 flex items-center justify-between'>
+                <Form onSubmit={submit}>
                     <Button type='submit' isDisabled={processing}>
                         Resend Verification Email
                     </Button>
+                </Form>
 
-                    <Link
-                        onPress={() => router.post(route('logout'))}
-                        className='text-sm text-muted-foreground hover:text-foreground focus:outline-none'
-                    >
-                        Log Out
-                    </Link>
-                </div>
-            </Form>
+                <Button onPress={() => router.post(route('logout'))} variant='danger'>
+                    <LogOutIcon /> Log Out
+                </Button>
+            </div>
         </>
     )
 }

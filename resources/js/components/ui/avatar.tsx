@@ -11,7 +11,8 @@ const avatarStyles = tv({
         size: {
             sm: 'size-6',
             md: 'size-8',
-            lg: 'size-10'
+            lg: 'size-10',
+            xl: 'size-12'
         },
         shape: {
             square: 'rounded-[--avatar-radius] *:rounded-[--avatar-radius]',
@@ -69,7 +70,6 @@ const Avatar = ({
                     viewBox='0 0 100 100'
                     aria-hidden={alt ? undefined : 'true'}
                 >
-                    {alt && <title>{alt}</title>}
                     <text
                         x='50%'
                         y='50%'

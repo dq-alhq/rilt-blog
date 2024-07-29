@@ -3,7 +3,7 @@ import React from 'react'
 import CopyButton from '@/components/copy-button'
 import { FileIcon } from '@/components/file-icon'
 import { cn, slugify } from '@/lib/utils'
-import 'highlight.js/styles/github-dark.min.css'
+import 'highlight.js/styles/night-owl.min.css'
 import ReactMarkdown from 'react-markdown'
 import rehypeHighlight from 'rehype-highlight'
 import remarkGfm from 'remark-gfm'
@@ -36,7 +36,7 @@ export const Markdown: React.FC<MarkdownContentProps> = ({ content, className })
                     if (match?.length) {
                         return (
                             <div className='bg-gradient-dark'>
-                                <div className='flex items-center justify-between px-4 py-2 border-b border-zinc-700 dark:border-border'>
+                                <div className='flex items-center justify-between px-4 py-1 md:py-2 border-b border-zinc-700 dark:border-border'>
                                     <div className='flex items-center gap-3'>
                                         <FileIcon filetype={match[1]} />
                                         <span className='text-xs text-white font-sans'>
@@ -47,7 +47,10 @@ export const Markdown: React.FC<MarkdownContentProps> = ({ content, className })
                                     <CopyButton id={id} />
                                 </div>
                                 <div className='overflow-auto w-full'>
-                                    <div className='p-5' id={id}>
+                                    <div
+                                        className='p-5 text-xs md:text-sm font-mono'
+                                        id={id}
+                                    >
                                         {children}
                                     </div>
                                 </div>
@@ -56,7 +59,7 @@ export const Markdown: React.FC<MarkdownContentProps> = ({ content, className })
                     } else {
                         return (
                             <code
-                                className='break-words before:hidden after:hidden text-sm bg-dark/10 border-dark/30 border px-1 py-0.5 rounded'
+                                className='break-words before:hidden after:hidden text-sm bg-dark/10 border-dark/30 border px-1 py-0.5 md:rounded'
                                 {...props}
                             >
                                 {children}
@@ -66,7 +69,7 @@ export const Markdown: React.FC<MarkdownContentProps> = ({ content, className })
                 }
             }}
             className={cn(
-                'prose dark:prose-invert prose-pre:p-0 prose-pre:rounded-xl prose-pre:border',
+                'prose dark:prose-invert prose-pre:p-0 prose-pre:-mx-5 prose-pre:-my-2 md:prose-pre:m-0 rounded-none md:prose-pre:rounded-xl prose-pre:border',
                 className
             )}
         >

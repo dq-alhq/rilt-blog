@@ -27,7 +27,6 @@ export default function Login({
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault()
-
         post(route('login'))
     }
 
@@ -37,7 +36,12 @@ export default function Login({
                 <div className='mb-4 text-sm font-medium text-success'>{status}</div>
             )}
 
-            <Form validationErrors={errors} onSubmit={submit} className='space-y-4'>
+            <Form
+                validationErrors={errors}
+                validationBehavior='aria'
+                onSubmit={submit}
+                className='space-y-4'
+            >
                 <TextField
                     label='Email'
                     id='email'

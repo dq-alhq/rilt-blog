@@ -15,7 +15,7 @@ const tabsStyles = tv({
     }
 })
 
-function Tabs(props: Primitive.TabsProps) {
+const Tabs = (props: Primitive.TabsProps) => {
     return (
         <Primitive.Tabs
             {...props}
@@ -41,7 +41,7 @@ const tabListStyles = tv({
     }
 })
 
-function TabList<T extends object>(props: Primitive.TabListProps<T>) {
+const TabList = <T extends object>(props: Primitive.TabListProps<T>) => {
     const id = useId()
     return (
         <LayoutGroup id={id}>
@@ -57,34 +57,34 @@ function TabList<T extends object>(props: Primitive.TabListProps<T>) {
     )
 }
 
-const tabProps = tv({
+const tabStyles = tv({
     base: [
-        'relative flex cursor-default items-center rounded-full text-sm font-medium outline-none transition hover:text-foreground',
+        'relative flex whitespace-nowrap cursor-default items-center rounded-full text-sm font-medium outline-none transition hover:text-primary [&_svg]:size-4 [&_svg]:mr-2',
         // hor
-        'group-orientation-vertical:w-full group-orientation-vertical:py-0',
+        'group-orientation-vertical:w-full group-orientation-vertical:py-0 group-orientation-vertical:pl-4 group-orientation-vertical:pr-2',
         // ver
-        'group-orientation-horizontal:pb-3 group-orientation-vertical:pl-4 group-orientation-vertical:pr-2'
+        'group-orientation-horizontal:pb-3'
     ],
     variants: {
         isSelected: {
-            false: 'text-muted-foreground',
-            true: 'text-foreground'
+            false: 'text-foreground',
+            true: 'text-primary'
         },
-        isFocused: { false: 'ring-0', true: 'text-foreground' },
+        isFocused: { false: 'ring-0', true: 'text-primary' },
         isDisabled: {
-            true: 'text-muted-foreground/50'
+            true: 'text-muted-foreground'
         }
     }
 })
 
-function Tab({ children, ...props }: Primitive.TabProps) {
+const Tab = ({ children, ...props }: Primitive.TabProps) => {
     return (
         <Primitive.Tab
             {...props}
             className={Primitive.composeRenderProps(
                 props.className,
                 (_className, renderProps) =>
-                    tabProps({
+                    tabStyles({
                         ...renderProps,
                         className: cn('href' in props && 'cursor-pointer', _className)
                     })
@@ -96,14 +96,14 @@ function Tab({ children, ...props }: Primitive.TabProps) {
                     {isSelected && (
                         <motion.span
                             className={cn(
-                                'absolute rounded bg-foreground',
+                                'absolute rounded bg-primary',
                                 // horizontal
                                 'group-orientation-horizontal:inset-x-0 group-orientation-horizontal:-bottom-px group-orientation-horizontal:h-0.5 group-orientation-horizontal:w-full',
                                 // vertical
                                 'group-orientation-vertical:left-0 group-orientation-vertical:h-[calc(100%-10%)] group-orientation-vertical:w-0.5 group-orientation-vertical:transform'
                             )}
                             layoutId='current-selected'
-                            transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+                            transition={{ type: 'spring', stiffness: 500, damping: 40 }}
                         />
                     )}
                 </>
@@ -116,7 +116,7 @@ const tabPanelStyles = tv({
     base: 'flex-1 text-sm text-foreground'
 })
 
-function TabPanel(props: Primitive.TabPanelProps) {
+const TabPanel = (props: Primitive.TabPanelProps) => {
     return (
         <Primitive.TabPanel
             {...props}
@@ -128,8 +128,7 @@ function TabPanel(props: Primitive.TabPanelProps) {
     )
 }
 
+Tabs.List = TabList
 Tabs.Content = TabPanel
 Tabs.Label = Tab
-Tabs.List = TabList
-
-export { Tab, TabList, TabPanel, Tabs }
+export { Tabs }

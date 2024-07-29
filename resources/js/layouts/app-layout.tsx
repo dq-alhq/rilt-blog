@@ -1,5 +1,6 @@
 import React, { PropsWithChildren } from 'react'
 
+import { Footer } from '@/components/footer'
 import { Navbar } from '@/components/navbar'
 import { Toaster } from '@/components/ui'
 
@@ -13,15 +14,9 @@ export default function AppLayout({
             <div className='min-h-screen'>
                 <Navbar />
 
-                {header && (
-                    <header className='bg-background border-b'>
-                        <h2 className='font-semibold container text-xl text-foreground leading-tight py-4'>
-                            {header}
-                        </h2>
-                    </header>
-                )}
+                <main className='min-h-[calc(100vh-12rem)]'>{children}</main>
 
-                <main>{children}</main>
+                <Footer />
             </div>
         </>
     )

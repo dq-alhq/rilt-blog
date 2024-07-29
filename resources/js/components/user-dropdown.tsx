@@ -1,6 +1,7 @@
 import { useTheme } from '@/components/providers'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { Avatar, buttonVariants, Link, Menu } from '@/components/ui'
+import { getInitials } from '@/lib/utils'
 import { User } from '@/types'
 import {
     BookCopyIcon,
@@ -19,7 +20,11 @@ export default function UserDropdown({ user }: { user: User }) {
         return (
             <Menu>
                 <Menu.Trigger>
-                    <Avatar id='profile-image' src={user?.avatar} alt={user?.name} />
+                    <Avatar
+                        initials={getInitials(user?.name)}
+                        id='profile-image'
+                        src={user?.avatar}
+                    />
                 </Menu.Trigger>
                 <Menu.Content className='w-56' placement='bottom right'>
                     <Menu.Section>
@@ -41,7 +46,10 @@ export default function UserDropdown({ user }: { user: User }) {
                             )}
                             <span>Switch Theme</span>
                         </Menu.Item>
-                        <Menu.Content aria-labelledby='switch-theme'>
+                        <Menu.Content
+                            placement='bottom end'
+                            aria-labelledby='switch-theme'
+                        >
                             <Menu.Item onAction={() => setTheme('system')}>
                                 <ComputerIcon />
                                 <span>System</span>
@@ -57,15 +65,15 @@ export default function UserDropdown({ user }: { user: User }) {
                         </Menu.Content>
                     </Menu.SubTrigger>
                     <Menu.Separator />
-                    <Menu.Item href='/dashboard'>
+                    <Menu.Item href={route('dashboard')}>
                         <GaugeIcon />
                         Dashboard
                     </Menu.Item>
-                    <Menu.Item href='/articles/list'>
+                    <Menu.Item href={route('articles.table')}>
                         <BookIcon />
                         Daftar Artikel
                     </Menu.Item>
-                    <Menu.Item href='/projects/list'>
+                    <Menu.Item href={route('projects.table')}>
                         <BookCopyIcon />
                         Daftar Project
                     </Menu.Item>

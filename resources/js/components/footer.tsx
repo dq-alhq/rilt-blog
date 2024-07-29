@@ -3,7 +3,7 @@ import { Button, Link, Separator } from '@/components/ui'
 import { siteConfig } from '@/config/site'
 
 export const Footer = () => (
-    <footer className='bg-background p-6 container max-w-screen-2xl'>
+    <footer className='p-6 container max-w-screen-2xl bg-gradient-to-t from-background to-transparent via-transparent'>
         <div className='flex items-center justify-between'>
             <Link href='/' className='items-center font-semibold uppercase flex'>
                 <Logo className='mx-3 size-4' /> {siteConfig.name}

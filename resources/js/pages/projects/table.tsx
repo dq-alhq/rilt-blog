@@ -1,24 +1,29 @@
-import { List, SearchItem } from '@/components/item-list'
-import { Project } from '@/types'
+import { List } from '@/components/item-list'
+import { Search } from '@/components/search'
+import { buttonVariants, Card, Link } from '@/components/ui'
+import UserLayout from '@/layouts/user-layout'
+import { BookPlusIcon } from 'lucide-react'
 
-interface Props {
-    projects: Project[]
-    page: number
-    total: number
-}
-
-export default async function ProjectListPage({ projects, total, page }: Props) {
+export default function ProjectsTable(props: any) {
+    const { data: projects, meta, links } = props.projects
     return (
-        <>
-            <div className='mb-6 flex w-full flex-wrap items-center justify-between gap-4'>
-                <h2 className='text-2xl font-semibold'>Project</h2>
-                <SearchItem />
-            </div>
+        <Card>
+            <Card.Header className='flex flex-col lg:flex-row w-full flex-wrap items-center justify-between gap-4'>
+                <Card.Title className='text-2xl font-semibold'>Project</Card.Title>
+                <div className='flex items-center gap-2'>
+                    <Search />
+                    <Link href={route('projects.create')} className={buttonVariants()}>
+                        <BookPlusIcon /> Buat Project
+                    </Link>
+                </div>
+            </Card.Header>
             {projects.length > 0 ? (
-                <List type='project' page={page} total={total} items={projects} />
+                <List type='project' items={projects} meta={meta} links={links} />
             ) : (
                 <div>Belum ada Project</div>
             )}
-        </>
+        </Card>
     )
 }
+
+ProjectsTable.layout = (page: any) => <UserLayout children={page} />

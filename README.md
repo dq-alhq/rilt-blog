@@ -88,4 +88,6 @@ be happy to review it.
 - [Tailwind CSS](https://github.com/tailwindlabs/tailwindcss) and friends
 - [parsinta.com](https://parsinta.com/)
 - [irsyad.co](https://irsyad.co/)
+- [Just D.](https://justd.co)
+- [Cleon-UI](https://cleon-ui.vercel.app)
 - My Beloved Mentor [Irsyad A. Pandjaitan](https://github.com/irsyadadl)

@@ -3,7 +3,7 @@ import React, { FormEventHandler } from 'react'
 import { Button, Form, Modal, TextField } from '@/components/ui'
 import { wait } from '@/lib/utils'
 import { FormSetting, Tag } from '@/types'
-import { router, useForm, usePage } from '@inertiajs/react'
+import { Head, router, useForm, usePage } from '@inertiajs/react'
 import { Tags } from 'lucide-react'
 
 export function TagForm({
@@ -31,6 +31,7 @@ export function TagForm({
     }
     return (
         <Modal isOpen={open} onOpenChange={closeForm}>
+            <Head title={form_setting.title} />
             <Modal.Trigger className='sr-only'>Open</Modal.Trigger>
             <Modal.Content size='xl' isDismissable={true} closeButton={true}>
                 <Modal.Header>

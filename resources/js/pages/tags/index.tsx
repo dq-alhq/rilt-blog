@@ -5,6 +5,7 @@ import { buttonVariants, Card, Link, Table } from '@/components/ui'
 import UserLayout from '@/layouts/user-layout'
 import { TagForm } from '@/pages/tags/form'
 import { Tag } from '@/types'
+import { Head } from '@inertiajs/react'
 import { EditIcon, TagsIcon } from 'lucide-react'
 
 export default function TagIndex(props: any) {
@@ -15,6 +16,7 @@ export default function TagIndex(props: any) {
     )
     return (
         <>
+            <Head title='Tags' />
             <TagForm open={openForm} setOpen={setOpenForm} />
             <Card>
                 <Card.Header className='flex flex-col lg:flex-row w-full flex-wrap items-center justify-between gap-4'>

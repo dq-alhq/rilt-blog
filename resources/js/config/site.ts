@@ -1,5 +1,5 @@
 export const siteConfig = {
-    name: 'Spesest',
+    name: import.meta.env.VITE_APP_NAME,
     url: 'https://spesest.vercel.app',
     description:
         ' Bagi anda yang ingin berusaha mengembangkan diri dalam bidang pemrograman dan web development.',

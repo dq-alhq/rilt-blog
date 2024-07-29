@@ -7,7 +7,7 @@ import { Avatar, Badge, buttonVariants, Card, Menu, Table } from '@/components/u
 import UserLayout from '@/layouts/user-layout'
 import { cn } from '@/lib/utils'
 import { PageProps, User } from '@/types'
-import { router, usePage } from '@inertiajs/react'
+import { Head, router, usePage } from '@inertiajs/react'
 import { MoreVerticalIcon, TrashIcon, UserCog2Icon, UserIcon } from 'lucide-react'
 
 export default function UsersTable(props: any) {
@@ -89,6 +89,7 @@ function Options({ item }: { item: User }) {
     const { user } = usePage<PageProps>().props.auth
     return (
         <>
+            <Head title='Users' />
             <DeleteAction
                 item={item as any}
                 type='user'
